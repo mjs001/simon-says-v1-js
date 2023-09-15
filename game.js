@@ -59,17 +59,27 @@ $(document).ready(function () {
 		}, 200);
 	}
 
-	function nextSequence() {
+	async function nextSequence() {
 		if (firstRun === false) {
 			level++;
 		}
 		var levelTitle = $("#level-title");
 		var levelText = $("#level-text");
+		var body = $("body");
 		var cpuText = " CPUs Turn:";
+		var playerText = "Players Turn:";
+		levelText.css("visibility", "visible");
 		levelText.text("Level " + level);
+		levelTitle.css("color", "rgba(29, 29, 29, 0.856)");
 		levelTitle.text(cpuText);
-		cpuPattern.push(randomChosenColor);
-		cpuAnimatePress();
+		await setTimeout(() => {
+			cpuAnimatePress();
+			setTimeout(() => {
+				levelTitle.css("color", "#e4e4e4");
+				levelTitle.text(playerText);
+			}, 500);
+		}, 1500);
+		reset();
 		firstRun = false;
 	}
 
@@ -78,6 +88,7 @@ $(document).ready(function () {
 		randomNumber = Math.floor(Math.random() * 3) + 1;
 		randomChosenColor = buttonColors[randomNumber];
 		randomColor = $("." + randomChosenColor);
+		cpuPattern.push(randomChosenColor);
 	}
 
 	function checkAnswer() {
@@ -87,10 +98,14 @@ $(document).ready(function () {
 			if (compareArrays(userClickedPattern, cpuPattern)) {
 				setTimeout(() => {
 					nextSequence();
-					reset();
 				}, 1000);
 			} else {
-				console.log("fail");
+				console.log(
+					"userClickedPattern",
+					userClickedPattern,
+					"cpuPattern",
+					cpuPattern
+				);
 			}
 		}
 	}
