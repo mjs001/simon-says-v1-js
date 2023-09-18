@@ -9,7 +9,8 @@ $(document).ready(function () {
 	var gameStarted = false;
 	var level = 0;
 	var firstRun = true;
-
+	var hasRunAnimation = 0;
+	var hasRunFade = 0;
 	const options = {
 		attributes: true,
 	};
@@ -37,6 +38,7 @@ $(document).ready(function () {
 		cpuColor.addClass("pressedCpu");
 		cpuColor.addClass("glow");
 		await fade(cpuColor);
+
 		await setTimeout(() => {
 			cpuColor.removeClass("glow");
 		}, 200);
@@ -47,15 +49,16 @@ $(document).ready(function () {
 	}
 
 	async function clickAnimatePress(clickedColor) {
-		var buttonJustClicked = $(`.${clickedColor}`);
-		buttonJustClicked.addClass("pressedUser");
-		buttonJustClicked.addClass("glowUser");
-		await fade(buttonJustClicked);
+		console.log("has run animation:", hasRunAnimation++);
+		clickedColor.addClass("pressedUser");
+		clickedColor.addClass("glowUser");
+		await fade(clickedColor);
+		console.log("fade has run:", hasRunFade++);
 		await setTimeout(() => {
-			buttonJustClicked.removeClass("glowUser");
+			clickedColor.removeClass("glowUser");
 		}, 200);
 		await setTimeout(() => {
-			buttonJustClicked.removeClass("pressedUser");
+			clickedColor.removeClass("pressedUser");
 		}, 200);
 	}
 
@@ -91,6 +94,18 @@ $(document).ready(function () {
 		cpuPattern.push(randomChosenColor);
 	}
 
+	function gameOver() {
+		$("#level-title").text("GAME OVER 😭");
+		$("#level-text").text("Double click restart the game.");
+		document.body.classList.add("game-over");
+		document.body.style.pointerEvents = "none";
+		firstRun = true;
+		level = 0;
+		cpuPattern = [];
+		userClickedPattern = [];
+		gameStarted = false;
+	}
+
 	function checkAnswer() {
 		var clickedIndex = userClickedPattern.length - 1;
 		var cpuIndex = cpuPattern.length - 1;
@@ -98,30 +113,33 @@ $(document).ready(function () {
 			if (compareArrays(userClickedPattern, cpuPattern)) {
 				setTimeout(() => {
 					nextSequence();
-				}, 1000);
+				}, 500);
 			} else {
-				console.log(
-					"userClickedPattern",
-					userClickedPattern,
-					"cpuPattern",
-					cpuPattern
-				);
+				gameOver();
 			}
 		}
 	}
 
-	$(document).on("keydown", (e) => {
-		if (gameStarted === false) {
+	$(document).on("dblclick", (e) => {
+		if (!gameStarted) {
+			document.body.style.pointerEvents = "auto";
+			document.body.classList.remove("game-over");
 			nextSequence();
 			gameStarted = true;
-			$(".btn").click(function () {
-				var userChosenColor = this.id;
-				userClickedPattern.push(userChosenColor);
-				var buttonJustClicked = $(`.${userChosenColor}`);
-				clickAnimatePress(userChosenColor);
-				playSound(this.id);
-				checkAnswer();
-			});
+		}
+	});
+
+	$(".btn").click(function (e) {
+		if (gameStarted === true) {
+			document.body.style.pointerEvents = "auto";
+			var userChosenColor = this.id;
+			userClickedPattern.push(userChosenColor);
+			var buttonJustClicked = $(`.${userChosenColor}`);
+			clickAnimatePress(buttonJustClicked);
+			playSound(this.id);
+			checkAnswer();
+		} else {
+			document.body.style.pointerEvents = "none";
 		}
 	});
 });
