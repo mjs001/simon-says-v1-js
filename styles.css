@@ -183,10 +183,10 @@ body {
 
 @media screen and (max-width: 600px) {
 	.btn {
-		margin: 0px;
+		margin: 18px;
 		border: 10px solid black;
 		border-radius: 20%;
-		height: 25% !important;
+		height: 13vh !important;
 		width: 80vw !important;
 	}
 	.row {
@@ -206,18 +206,20 @@ body {
 	.containsText {
 		height: 50px;
 	}
+	.play-button {
+		width: 60vw;
+		font-size: 1rem !important;
+		margin-top: 25px;
+	}
 }
 .containsText {
-	height: 18%;
 	width: 100%;
 }
 .btn {
 	margin: 25px;
 	display: inline-block;
-	height: 200px;
+	height: 180px;
 	width: 200px;
-	border: 10px solid black;
-	border-radius: 20%;
 }
 
 .game-over {
@@ -243,18 +245,58 @@ body {
 
 .red {
 	background-color: red;
+	-webkit-box-shadow: inset 1px 6px 12px rgb(255, 142, 142),
+		inset -1px -10px 5px rgb(136, 0, 0), 1px 2px 1px rgb(40, 2, 2);
+	-moz-box-shadow: inset 1px 6px 12px rgb(255, 142, 142),
+		inset -1px -10px 5px rgb(100, 0, 0), 1px 2px 1px rgb(40, 2, 2);
+	box-shadow: inset 1px 6px 12px rgb(255, 142, 142),
+		inset -1px -10px 5px rgb(100, 0, 0), 1px 2px 1px rgb(40, 2, 2);
+	color: white;
+	text-shadow: 1px 1px 1px rgb(21, 1, 1);
+	border: 4px solid rgb(30, 1, 1);
+	border-radius: 20%;
 }
 
 .green {
 	background-color: green;
+	-webkit-box-shadow: inset 1px 6px 12px rgb(146, 255, 182),
+		inset -1px -10px 5px rgb(11, 81, 41), 1px 2px 1px rgb(6, 45, 23);
+	-moz-box-shadow: inset 1px 6px 12px rgb(146, 255, 182),
+		inset -1px -10px 5px rgb(11, 81, 41), 1px 2px 1px rgb(6, 45, 23);
+	box-shadow: inset 1px 6px 12px rgb(146, 255, 182),
+		inset -1px -10px 5px rgb(11, 81, 41), 1px 2px 1px rgb(6, 45, 23);
+	color: white;
+	text-shadow: 1px 1px 1px black;
+	border: 4px solid rgb(2, 20, 10);
+	border-radius: 20%;
 }
 
 .blue {
 	background-color: blue;
+	-webkit-box-shadow: inset 1px 6px 12px rgb(202, 201, 255),
+		inset -1px -10px 5px rgb(14, 25, 100), 1px 2px 1px rgb(5, 15, 34);
+	-moz-box-shadow: inset 1px 6px 12px rgb(202, 201, 255),
+		inset -1px -10px 5px rgb(14, 25, 100), 1px 2px 1px rgb(5, 15, 34);
+	box-shadow: inset 1px 6px 12px rgb(202, 201, 255),
+		inset -1px -10px 5px rgb(14, 25, 100), 1px 2px 1px rgb(5, 15, 34);
+	color: white;
+	text-shadow: 1px 1px 1px black;
+	border: 4px solid rgb(7, 6, 27);
+	border-radius: 20%;
 }
 
 .yellow {
 	background-color: yellow;
+	-webkit-box-shadow: inset 1px 6px 12px rgb(251, 255, 180),
+		inset -1px -10px 5px rgb(119, 113, 6), 1px 2px 1px rgb(77, 77, 0);
+	-moz-box-shadow: inset 1px 6px 12px rgb(251, 255, 180),
+		inset -1px -10px 5px rgb(119, 113, 6), 1px 2px 1px rgb(77, 77, 0);
+	box-shadow: inset 1px 6px 12px rgb(251, 255, 180),
+		inset -1px -10px 5px rgb(119, 113, 6), 1px 2px 1px rgb(77, 77, 0);
+	color: white;
+	text-shadow: 1px 1px 1px black;
+	border: 4px solid rgb(36, 36, 0);
+	border-radius: 20%;
 }
 
 .pressedCpu {
@@ -292,4 +334,36 @@ body {
 	100% {
 		box-shadow: none;
 	}
+}
+
+.play-button {
+	display: inline-block;
+	background: #9bd4e4;
+	color: #0784b5;
+	font-size: 1.4em;
+	font-weight: bold;
+	padding: 0.5em 0.7em;
+	line-height: 1;
+	letter-spacing: 0.2rem;
+	text-decoration: none;
+	border: solid 2px rgba(255, 255, 255, 0.45);
+	border-radius: 0.65em;
+	text-shadow: 1px 1px #000;
+	box-shadow: 0px 6px 0 2px #0784b5, 0 2px 0 2px #0784b5;
+	transition: 0.15s ease-in;
+	transform-origin: bottom;
+	width: 150px;
+	font-size: 1.3rem;
+	margin-top: 10px;
+	visibility: visible;
+}
+.play-button:hover {
+	background: #cadeef;
+	box-shadow: 0px 7px 0 2px #39ace7, 0 2px 0 2px #39ace7;
+	transform: translate(0px, -1px);
+}
+.play-button:active {
+	box-shadow: 0px 1px 0 1px #0784b5, 0 1px 1px 1px #0784b5;
+	transform: translate(0px, 5px);
+	transition: 0.08s ease-out;
 }

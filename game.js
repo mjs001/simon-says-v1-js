@@ -49,11 +49,9 @@ $(document).ready(function () {
 	}
 
 	async function clickAnimatePress(clickedColor) {
-		console.log("has run animation:", hasRunAnimation++);
 		clickedColor.addClass("pressedUser");
 		clickedColor.addClass("glowUser");
 		await fade(clickedColor);
-		console.log("fade has run:", hasRunFade++);
 		await setTimeout(() => {
 			clickedColor.removeClass("glowUser");
 		}, 200);
@@ -96,9 +94,10 @@ $(document).ready(function () {
 
 	function gameOver() {
 		$("#level-title").text("GAME OVER 😭");
-		$("#level-text").text("Double click restart the game.");
+		$("#level-text").text('Click "restart" to play again.');
+		$(".play-button").css("visibility", "visible");
+		$(".play-button").text("Restart");
 		document.body.classList.add("game-over");
-		document.body.style.pointerEvents = "none";
 		firstRun = true;
 		level = 0;
 		cpuPattern = [];
@@ -120,10 +119,10 @@ $(document).ready(function () {
 		}
 	}
 
-	$(document).on("dblclick", (e) => {
+	$(".play-button").on("click", (e) => {
 		if (!gameStarted) {
-			document.body.style.pointerEvents = "auto";
 			document.body.classList.remove("game-over");
+			$(".play-button").css("visibility", "hidden");
 			nextSequence();
 			gameStarted = true;
 		}
@@ -131,7 +130,6 @@ $(document).ready(function () {
 
 	$(".btn").click(function (e) {
 		if (gameStarted === true) {
-			document.body.style.pointerEvents = "auto";
 			var userChosenColor = this.id;
 			userClickedPattern.push(userChosenColor);
 			var buttonJustClicked = $(`.${userChosenColor}`);
@@ -139,7 +137,7 @@ $(document).ready(function () {
 			playSound(this.id);
 			checkAnswer();
 		} else {
-			document.body.style.pointerEvents = "none";
+			this.disabled = true;
 		}
 	});
 });
