@@ -2,5 +2,8 @@
 
 [https://mjs001.github.io/simon-says-v1-js/](https://mjs001.github.io/simon-says-v1-js/)
 
-Version consists of pattern continually getting longer each level and user having to remember how the sequence goes. Instead of a random sequence each level.
+This is a rendition of "Simon Says" made with JS, Jquery, HTML and CSS.
 
+## Instructions
+
+There are 4 buttons a red, blue, green and yellow button. Follow the pattern that the CPU creates by clicking the corresponding button in sequence. The pattern will get longer each turn.
